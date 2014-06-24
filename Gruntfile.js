@@ -50,6 +50,7 @@ module.exports = function(grunt) {
       styles: ['public/css', 'build/<%= ops.built.css %>.css'],
       templates: ['public/**/*.html'],
       img: ['public/img'],
+      data: ['public/data'],
       dev: {
         src: ['public', 'build']
       },
@@ -93,6 +94,14 @@ module.exports = function(grunt) {
           dest: 'public/img'
         }]
       },
+      data: {
+        files: [{
+          expand: true,
+          cwd: 'client/data',
+          src: '**/*',
+          dest: 'public/data'
+        }]
+      },
       dev: {
         files: [{
           src: 'build/<%= ops.built.js %>.js',
@@ -118,6 +127,12 @@ module.exports = function(grunt) {
           cwd: 'client/img',
           src: '**/*',
           dest: 'public/img'
+        },
+        {
+          expand: true,
+          cwd: 'client/data',
+          src: '**/*',
+          dest: 'public/data'
         }]
       },
       prod: {
@@ -138,6 +153,12 @@ module.exports = function(grunt) {
           cwd: 'client/img',
           src: '**/*',
           dest: 'dist/img'
+        },
+        {
+          expand: true,
+          cwd: 'client/data',
+          src: '**/*',
+          dest: 'dist/data'
         }]
       }
     },
@@ -218,7 +239,7 @@ module.exports = function(grunt) {
         //helpers: 'client/templates/helpers/**/*.js',
         //partials: 'client/templates/partials/**/*.hbs',
         globals: [
-          'client/data/global.json'
+          'data/global.json'
         ]
       },
       prod: {
@@ -228,7 +249,7 @@ module.exports = function(grunt) {
         //helpers: 'client/templates/helpers/**/*.js',
         //partials: 'client/templates/partials/**/*.hbs',
         globals: [
-          'client/data/global.json'
+          'data/global.json'
         ]
       }
     },
@@ -270,7 +291,7 @@ module.exports = function(grunt) {
         tasks: ['clean:styles', 'less:transpile', 'copy:styles']
       },
       templates: {
-        files: ['client/templates/views/**/*.hbs', 'client/templates/views/**/*.json', 'client/data/**/*.json'],
+        files: ['client/templates/views/**/*.hbs', 'client/templates/views/**/*.json', 'data/**/*.json'],
         tasks: ['clean:templates', 'compile-handlebars:dev']
       },
       karma: {
