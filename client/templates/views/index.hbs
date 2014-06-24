@@ -12,6 +12,7 @@
     <link href="fonts/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -23,101 +24,25 @@
   <body>
 
     <header id="header">
-      <div class="trim-color-block yellow-back"></div>
-      <div class="trim-color-block amber-back"></div>
-      <div class="trim-color-block orange-back"></div>
-      <div class="trim-color-block sunset-back"></div>
-      <div class="trim-color-block red-back"></div>
-      <div class="trim-color-block fuchsia-back"></div>
-      <div class="trim-color-block purple-back"></div>
-      <div class="trim-color-block indigo-back"></div>
-      <div class="trim-color-block blue-back"></div>
-      <div class="trim-color-block aqua-back"></div>
-      <div class="trim-color-block green-back"></div>
-      <div class="trim-color-block lime-back"></div>
-      <div class="header container">
-        <div class="header-inner">
-          <a class="hover-img"><img src="fonts/logo.png" class="header-icon-image"/></a>
-          <a href="{{joe.github.href}}" target="_blank" class="hover-link"><i class="fa fa-github"></i></a>
-          <a href="{{joe.twitter.href}}" target="_blank" class="hover-link"><i class="fa fa-twitter"></i></a>
-        </div>
+      <div class="header">
+
       </div>
     </header>
 
     <div id="content" class="container">
+      <h1>Static-Seed <small>by <a href="{{joe.twitter.href}}" target="_blank">@jomrcr</a></small></h1>
 
-      <section id="intro">
+      <h3>What is Static-Seed?</h3>
+      <p>Static-Seed is boilerplate for a static website. It includes a bunch of useful tools for getting a static website up and running quickly, and easily deployed to Github Pages.</p>
 
-        <div id="intro-title">
-          <div class="golden-col-md-narrow">
-            <img src="img/jomrcr.jpg" class="intro-img hover-img img-circle img-responsive center-block">
-          </div>
-          <div class="golden-col-md-wide text-center">
-            <h1 class="intro-title-header"><a href="{{joe.twitter.href}}" target="_blank" class="hover-link">@jomrcr</a></h1>
-          </div>
-          <div class="clearfix"></div>
-        </div>
+      <h3>Where can I find Static-Seed?</h3>
+      <p>On <a href="https://github.com/joemercer/static-seed" target="_blank">Github</a>.</p>
 
-        <div id="intro-summary">
-          <div class="golden-content center-block">
-            <p>Hey folks, I'm Joe Mercer and I write code for <a href="{{noom.href}}" target="_blank" class="hover-link">{{noom.label}}</a> in NYC. Previously I worked at <a href="{{tagged.href}}" target="_blank" class="hover-link">{{tagged.label}}</a> in San Francisco and <a href="{{bazaarvoice.href}}" target="_blank" class="hover-link">{{bazaarvoice.label}}</a> in Austin. I also study math at the <a href="{{uWaterloo.href}}" target="_blank" class="hover-link">{{uWaterloo.label}}</a> in Canada. I grew up in Redmond, near Seattle. I love meeting new people. Say <a href="mailto:{{joe.email}}?Subject=Hello!" target="_top" class="hover-link">hello</a>!</p>
-          </div>
-        </div>
+      <h3>How do I use Static-Seed?</h3>
+      <p>Go read the docs on <a href="https://github.com/joemercer/static-seed" target="_blank">Github</a>.</p>
 
-        <nav class="nav-container">
-          <div class="nav-inner-container">
-            <div class="header-cover header-inner hide">
-              <a href="{{joe.website}}" target="_blank" class="hover-img"><img src="fonts/logo.png" class="header-icon-image"/></a>
-              <a href="{{joe.github.href}}" target="_blank" class="hover-link"><i class="fa fa-github"></i></a>
-              <a href="{{joe.twitter.href}}" target="_blank" class="hover-link"><i class="fa fa-twitter"></i></a>
-            </div>
-            <ul class="nav hover-nav-item hide">
-              <li class="nav-item opacity-hide nav-item-transition-1">
-                <a class="scroll-to" data-scroll-target="#projects">Projects</a>
-              </li>
-              <li class="nav-item opacity-hide nav-item-transition-2">
-                <a class="scroll-to" data-scroll-target="#posts">Posts</a>
-              </li>
-              <li class="nav-item opacity-hide nav-item-transition-3">
-                <a class="scroll-to" data-scroll-target="#pics">Pics</a>
-              </li>
-            </ul>
-            <a><i class="fa fa-plus nav-icon toggle-nav rotate-effect"></i></a>
-          </div>
-        </nav>
-        <div class="nav-fixed-buffer hide">
-        </div>
-
-      </section>
-
-      <section id="projects" class="row">
-        <div class="golden-col-md-narrow text-center">
-          <h2>{{projects.label}}</h2>
-        </div>
-        <div class="golden-col-md-wide">
-          {{#each projects.items}}
-            <p><a href="{{href}}" target="_blank" class="hover-link">{{title}}</a> - {{summary}}</p>
-          {{/each}}
-        </div>
-      </section>
-
-      <section id="posts" class="row">
-        <div class="golden-col-md-narrow golden-col-md-wide-push text-center">
-          <h2>Posts</h2>
-        </div>
-        <div class="golden-col-md-wide golden-col-md-narrow-pull">
-          <p class="text-center" style="font-size:1.8rem;">Coming soon!</p>
-        </div>
-      </section>
-
-      <section id="pics" class="row">
-        <div class="golden-col-md-narrow text-center">
-          <h2>Pics</h2>
-        </div>
-        <div class="golden-col-md-wide">
-          <p class="text-center" style="font-size:1.8rem;">Coming soon!</p>
-        </div>
-      </section>
+      <h3>Why does this site suck?</h3>
+      <p>Cuz I'm still in the process of building it! If you have questions please feel free to <a href="{{joe.twitter.href}}" target="_blank">tweet at me</a>.</p>
 
     </div>
 

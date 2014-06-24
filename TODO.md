@@ -23,8 +23,6 @@ ________
 
 - pull out the more general stuff into gists and then just link to the gist
 
-- update the example app to NOT BE MY PERSONAL WEBSITE
-
 
 # Backlog
 ___________

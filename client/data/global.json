@@ -11,21 +11,5 @@
       "label": "github.com/joemercer",
       "href": "https://github.com/joemercer"
     }
-  },
-  "noom": {
-    "label": "Noom",
-    "href": "http://www.noom.com/"
-  },
-  "tagged": {
-    "label": "Tagged",
-    "href": "http://about.tagged.com/"
-  },
-  "bazaarvoice": {
-    "label": "Bazaarvoice",
-    "href": "http://www.bazaarvoice.com/"
-  },
-  "uWaterloo": {
-    "label": "University of Waterloo",
-    "href": "https://uwaterloo.ca/about/"
   }
 }
