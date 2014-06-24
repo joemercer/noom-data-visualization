@@ -1,6 +1,7 @@
 # TODO
 ________
 
+- instructions on removing the git remote after cloning
 
 - also edit the TODO file (split it into sections, make it nice looking, etc)
 - edit the README !!!
