@@ -51,7 +51,14 @@ DataService.init('accessCode', function(data){
       .data(partition.nodes(root))
     .enter().append("path")
       .attr("d", arc)
-      .style("fill", function(d) { return color((d.children ? d : d.parent).name); })
+      .style("fill", function(d) {
+      	debugger;
+      	// lets just do d.color here
+      	// then we can rely on our data model to assign colors
+      	// the data model can have an array matching names to colors
+      	// plus a function for assigning a random color (or an in order random color)
+      	return color((d.children ? d : d.parent).name);
+      })
       .on("click", click);
 
   function click(d) {
