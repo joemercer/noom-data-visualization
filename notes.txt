@@ -1,0 +1,6 @@
+
+- use this to get a json blob to work with
+http://stackoverflow.com/questions/3040904/save-json-outputed-from-a-url-to-a-file
+curl answer is down at the bottom
+
+diana isakova
