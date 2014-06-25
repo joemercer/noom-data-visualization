@@ -3,4 +3,14 @@
 http://stackoverflow.com/questions/3040904/save-json-outputed-from-a-url-to-a-file
 curl answer is down at the bottom
 
+https://data.noom.com/servlets/HighScoreServer/calorific/download.htm?jsonRequest={%22accessCode%22:%22SK55HNCD%22,%22generateNewUuids%22:true,%22lastDownloadedGeneration%22:0}
+
 diana isakova
+
+
+http://bl.ocks.org/mbostock/4348373
+http://dimplejs.org/advanced_examples_viewer.html?id=advanced_time_axis
+http://bl.ocks.org/MattWoelk/5196687
+http://benjchristensen.com/2012/05/15/interactive-line-graph-using-d3-js/
+http://bl.ocks.org/mbostock/3883245
+http://bl.ocks.org/mbostock/3884955
