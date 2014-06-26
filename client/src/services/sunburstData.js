@@ -6,6 +6,7 @@ var SunburstData = {
 	// cache the data
 	data: {
 		name: 'foodItems',
+		color: 'black',
 		children: []
 	},
 
@@ -21,6 +22,7 @@ var SunburstData = {
 		if (!foodType) {
 			foodType = {
 				name: item.foodType,
+				color: this.getColor(item.foodType),
 				children: []
 			};
 			this.data.children.push(foodType);
@@ -39,11 +41,37 @@ var SunburstData = {
 		else {
 			var foodCatagory = {
 				name: item.foodCategoryCode,
+				color: this.getColor(item.foodCategoryCode),
 				size: item.calories
 			};
 			foodType.children.push(foodCatagory);
 		}
 
+	},
+
+	_colors: [
+		'purple',
+		'yellow',
+		'orange',
+		'teal',
+		'pink',
+		'azure',
+		'maroon'
+	],
+
+	_colorsMap: {
+		'RED': 'red',
+		'YELLOW': 'yellow',
+		'GREEN': 'green',
+		'WATER': 'blue'
+	},
+
+	getColor: function(name) {
+		if (!this._colorsMap[name]) {
+			var index = Math.floor(Math.random() * this._colors.length);
+			this._colorsMap[name] = this._colors[index];
+		}
+		return this._colorsMap[name];
 	}
 
 };
