@@ -1,4 +1,5 @@
 var d3 = require('d3');
+var _ = require('lodash');
 
 module.exports = {
 
@@ -25,17 +26,17 @@ module.exports = {
 			BREAKFAST: {
 				0: {
 					x: 0,
-					y: 0,
+					y: 5,
 					xAxisLabel: 'January'
 				},
 				1: {
 					x: 1,
-					y: 0,
+					y: 50,
 					xAxisLabel: 'February'
 				},
 				2: {
 					x: 2,
-					y: 0,
+					y: 25,
 					xAxisLabel: 'February'
 				}
 			},
@@ -51,19 +52,30 @@ module.exports = {
 
 		};
 
+		// i guess we need to do some data cleaning here
+		var lineKeys = data.keys;
+		var monthKeys = [0,1,2,3,4,5,6,7,8,9,10,11,12];
+
+
+
+
 		var margin = {top: 20, right: 80, bottom: 30, left: 50},
 		    width = 960 - margin.left - margin.right,
 		    height = 500 - margin.top - margin.bottom;
 
 		var parseDate = d3.time.format("%Y%m%d").parse;
 
-		var x = d3.time.scale()
-		    .range([0, width]);
+		var x = d3.scale.ordinal()
+				.domain(monthKeys);
+		    //.range([0, width]);
 
 		var y = d3.scale.linear()
 		    .range([height, 0]);
 
-		var color = d3.scale.category10();
+		// set the domain of the different lines
+		// distinguished by color
+		var color = d3.scale.category10()
+				.domain(lineKeys);
 
 		var xAxis = d3.svg.axis()
 		    .scale(x)
@@ -87,28 +99,26 @@ module.exports = {
 
 		// start doing stuff with the data
 
-	  color.domain(d3.keys(data.keys));
+		// set the domain of the different lines
+		// distinguished by color
+	  // color.domain(data.keys);
+
+
 
 	  // data.forEach(function(d) {
 	  //   d.date = parseDate(d.date);
 	  // });
 
-	  var lines = color.domain().map(function(name) {
-	  	debugger;
-	    return {
-	      name: name,
-	      values: _(data).map(function(d) {
-	      	debugger;
-	        return {date: d.date, temperature: +d[name]};
-	      })
-	    };
-	  });
-
-	  x.domain(d3.extent(data, function(d) { return d.date; }));
+	  // var lines = color.domain().map(function(key) {
+	  //   return {
+	  //     key: key,
+	  //     values: data[key]
+	  //   };
+	  // });
 
 	  y.domain([
-	    d3.min(lines, function(c) { return d3.min(c.values, function(v) { return v.temperature; }); }),
-	    d3.max(lines, function(c) { return d3.max(c.values, function(v) { return v.temperature; }); })
+	  	5,
+	  	50
 	  ]);
 
 	  svg.append("g")
