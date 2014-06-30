@@ -18,6 +18,26 @@ var NoomData = {
 
 		$.getJSON('data/SK55HNCD.json', _.bind(function(data){
 			this.data = data;
+
+
+			// var timeSlots = {};
+
+			// _(data.operations).forEach(function(item) {
+			// 	if (item.foodEntry) {
+			// 		if (timeSlots[item.foodEntry.timeSlot]) {
+			// 			timeSlots[item.foodEntry.timeSlot]++;
+			// 		}
+			// 		else {
+			// 			timeSlots[item.foodEntry.timeSlot] = 1;
+			// 		}
+			// 	}
+			// });
+
+			// console.log(timeSlots);
+
+
+
+
 			cb(data);
 		}, this));
 	
