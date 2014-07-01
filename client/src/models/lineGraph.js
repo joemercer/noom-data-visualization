@@ -1,4 +1,6 @@
+var Backbone = require('backbone');
 var _ = require('lodash');
+
 
 // by luck of the draw we can array index these correctly
 var getPointsForMonths = function() {
@@ -126,21 +128,18 @@ var getSeries = function(points) {
 	};
 };
 
-var LineGraph = function() {
+var LineGraph = Backbone.Model.extend({
 
-};
-
-_.extend(LineGraph, {
-
-	data: {
+	defaults: {
 		byMonth: getSeries(getPointsForMonths()),
 		byDayOfWeek: getSeries(getPointsForDayOfWeek())
 	},
 
-	months: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-	daysOfWeek: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+	// months: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+	// daysOfWeek: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
 
 	getData: function() {
+		debugger;
 		var data = {};
 		data.byMonth = _(this.data).map(function(value) { return value; });
 		data.byDayOfWeek = _(this.data).map(function(value) { return value; });
@@ -152,19 +151,19 @@ _.extend(LineGraph, {
 
 		var date = new Date(foodEntry.dateConsumed);
 
-		// byMonths
+		// byMonths for both timeSlot and COMBINED
 		var month = date.getMonth();
-		// increment the calories for the food slot
-		this.data.byMonth[foodEntry.timeSlot][month].y += foodEntry.calories;
-		// increment the calories for the combined
-		this.data.byMonth.COMBINED[month].y += foodEntry.calories;
+		var byMonth = this.get('byMonth');
+		byMonth[foodEntry.timeSlot].points[month].y += foodEntry.calories;
+		byMonth.COMBINED.points[month].y += foodEntry.calories;
+		this.set('byMonth', byMonth);
 
-		// byDayOfWeek
+		// byDayOfWeek for both timeSlot and COMBINED
 		var dayOfWeek = date.getDay();
-		// increment the calories for the food slot
-		this.data.byDayOfWeek[foodEntry.timeSlot][dayOfWeek].y += foodEntry.calories;
-		// increment the calories for the combined
-		this.data.byDayOfWeek.COMBINED[month].y += foodEntry.calories;
+		var byDayOfWeek = this.get('byDayOfWeek');
+		byDayOfWeek[foodEntry.timeSlot].points[dayOfWeek].y += foodEntry.calories;
+		byDayOfWeek.COMBINED.points[month].y += foodEntry.calories;
+		this.set('byDayOfWeek', byDayOfWeek);
 
 	}
 

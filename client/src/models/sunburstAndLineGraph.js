@@ -7,39 +7,11 @@ var LineGraphModel = require('./lineGraph');
 
 module.exports = {
 
-	// data for the sunburst and line graph visualization
-	// data: {
-	// 	name: 'foodEntries',
-	// 	color: 'black',
-	// 	line: [
-	// 		{
-	// 			name: 'combined',
-	// 			color: 'black',
-	// 			points: {
-	// 				byMonth: [{
-	// 					x: 'date',
-	// 					y: 'calories'
-	// 				}],
-	// 				byDayOfWeek: [{
-	// 					x: 'date',
-	// 					y: 'calories'
-	// 				}],
-	// 				byDayOfMonth: [{
-	// 					x: 'date',
-	// 					y: 'calories'
-	// 				}]
-	// 			}
-	// 		}
-	// 		// ... (breakfast, lunch, dinner)
-	// 	]
-	// 	children: [
-	// 		// ...
-	// 	]
-	// },
+	// !!! name should be key
 	data: {
 		name: 'foodEntries',
 		color: 'black',
-		lineGraph: _(LineGraphModel).extend(),
+		lineGraph: new LineGraphModel(),
 		children: [
 			// red, yellow, green
 		]
@@ -73,13 +45,13 @@ module.exports = {
 
 	add: function(foodEntry) {
 
-		this._addToLine(this.data.lineGraph, foodEntry);
+		this.data.lineGraph.add(foodEntry);
 
 		var foodType = this._addFoodType(foodEntry);
-		this._addToLine(foodType.lineGraph, foodEntry);
+		foodType.lineGraph.add(foodEntry);
 
 		var foodCatagory = this._addFoodCatagory(foodType, foodEntry);
-		this._addToLine(foodCatagory.lineGraph, foodEntry);
+		foodCatagory.lineGraph.add(foodEntry);
 
 	},
 
@@ -96,7 +68,7 @@ module.exports = {
 			foodType = {
 				name: foodEntry.foodType,
 				color: this.getColor(foodEntry.foodType),
-				// lineGraph: getLineGraphModel(),
+				lineGraph: new LineGraphModel(),
 				children: []
 			};
 			this.data.children.push(foodType);
@@ -122,52 +94,13 @@ module.exports = {
 			foodCatagory = {
 				name: foodEntry.foodCategoryCode,
 				color: this.getColor(foodEntry.foodCategoryCode),
-				// lineGraph: getLineGraphModel(),
+				lineGraph: new LineGraphModel(),
 				size: foodEntry.calories
 			};
 			foodType.children.push(foodCatagory);
 		}
 
 		return foodCatagory;
-	},
-
-	_addToLine: function(line, foodEntry) {
-
-		var date = new Date(foodEntry.dateConsumed);
-		var month = date.getMonth();
-
-		// month for specific timeslot
-		var foundMonth = _(line[foodEntry.timeSlot].points.byMonth).find(function(point){
-			return point.x === month;
-		});
-
-		if (!foundMonth) {
-			line[foodEntry.timeSlot].points.byMonth.push({
-				x: month,
-				y: foodEntry.calories
-			});
-		}
-		else {
-			foundMonth.y += foodEntry.calories;
-		}
-
-		// combined month
-		var foundCombinedMonth = _(line.COMBINED.points.byMonth).find(function(point){
-			return point.x === month;
-		});
-
-		if (!foundCombinedMonth) {
-			line.COMBINED.points.byMonth.push({
-				x: month,
-				y: foodEntry.calories
-			});
-		}
-		else {
-			foundCombinedMonth.y += foodEntry.calories;
-		}
-
-		// repeat for day of week and day of month
-
 	},
 
 

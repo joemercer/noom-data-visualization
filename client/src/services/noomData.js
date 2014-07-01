@@ -35,8 +35,6 @@ var NoomData = {
 
 			// console.log(timeSlots);
 
-			debugger;
-
 
 
 

@@ -17,6 +17,7 @@
   "browser": {
     "jquery": "./bower_components/jquery/jquery.js",
     "lodash": "./node_modules/lodash/dist/lodash.compat.js",
+    "backbone": "./bower_components/backbone/backbone.js",
     "d3": "./bower_components/d3/d3.js"
   },
   "browserify-shim": "./shims.js",
