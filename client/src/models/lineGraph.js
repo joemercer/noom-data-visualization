@@ -163,7 +163,7 @@ var LineGraph = Backbone.Model.extend({
 		var dayOfWeek = date.getDay();
 		var byDayOfWeek = this.get('byDayOfWeek');
 		byDayOfWeek[foodEntry.timeSlot].points[dayOfWeek].y += foodEntry.calories;
-		byDayOfWeek.COMBINED.points[month].y += foodEntry.calories;
+		byDayOfWeek.COMBINED.points[dayOfWeek].y += foodEntry.calories;
 		this.set('byDayOfWeek', byDayOfWeek);
 
 	}

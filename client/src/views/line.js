@@ -35,7 +35,7 @@ var LineGraph = Backbone.View.extend({
 
 		// !!! this should be dynamic cuz sometimes we don't want months
 		var x = d3.scale.ordinal()
-				.domain(this.months)
+				.domain(this.daysOfWeek)
 				.rangePoints([0, width], 0);
 
 		var y = d3.scale.linear()
@@ -68,7 +68,7 @@ var LineGraph = Backbone.View.extend({
 		// !!! don't always want byMonth - should be configurable
 		// transform the data into an array
 		// !!! this seems hacky
-		var series = this.model.get('byMonth');
+		var series = this.model.get('byDayOfWeek');
 		series = _(series).map(function(value) { return value; });
 		series = series.__wrapped__;
 
