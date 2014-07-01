@@ -88,42 +88,42 @@ var getPointsForDayOfWeek = function() {
 	];
 };
 
-var getSeries = function(points) {
+var getSeries = function(getPoints) {
 	return {
 		COMBINED: {
 			key: 'COMBINED',
 			label: 'Combined',
-			points: points
+			points: getPoints()
 		},
 		BREAKFAST: {
 			key: 'BREAKFAST',
 			label: 'Breakfast',
-			points: points
+			points: getPoints()
 		},
 		MORNING_SNACK: {
 			key: 'MORNING_SNACK',
 			label: 'Morning Snack',
-			points: points
+			points: getPoints()
 		},
 		LUNCH: {
 			key: 'LUNCH',
 			label: 'Lunch',
-			points: points
+			points: getPoints()
 		},
 		AFTERNOON_SNACK: {
 			key: 'AFTERNOON_SNACK',
 			label: 'Afternoon Snack',
-			points: points
+			points: getPoints()
 		},
 		DINNER: {
 			key: 'DINNER',
 			label: 'Dinner',
-			points: points
+			points: getPoints()
 		},
 		EVENING_SNACK: {
 			key: 'EVENING_SNACK',
 			label: 'Evening Snack',
-			points: points
+			points: getPoints()
 		}
 	};
 };
@@ -131,13 +131,14 @@ var getSeries = function(points) {
 var LineGraph = Backbone.Model.extend({
 
 	defaults: {
-		byMonth: getSeries(getPointsForMonths()),
-		byDayOfWeek: getSeries(getPointsForDayOfWeek())
+		byMonth: getSeries(getPointsForMonths),
+		byDayOfWeek: getSeries(getPointsForDayOfWeek)
 	},
 
 	// months: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
 	// daysOfWeek: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
 
+	// !!! this method needs to be removed and made Backbone-y
 	getData: function() {
 		debugger;
 		var data = {};
