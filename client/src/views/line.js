@@ -5,56 +5,19 @@ module.exports = {
 
 	create: function(data) {
 
-		// !!! these should be added to the actual data
-		data = {
-			labels: {
-				xAxis: 'Months',
-				yAxis: 'Calories',
-				keys: {
-					BREAKFAST: 'Breakfast',
-					LUNCH: 'Lunch',
-					DINNER: 'Dinner',
-					TOTAL: 'Total'
-				}
-			},
-			keys: [
-				'BREAKFAST',
-				'LUNCH',
-				'DINNER',
-				'TOTAL'
-			],
-			BREAKFAST: {
-				0: {
-					x: 0,
-					y: 5,
-					xAxisLabel: 'January'
-				},
-				1: {
-					x: 1,
-					y: 50,
-					xAxisLabel: 'February'
-				},
-				2: {
-					x: 2,
-					y: 25,
-					xAxisLabel: 'February'
-				}
-			},
-			LUNCH: {
-
-			},
-			DINNER: {
-
-			},
-			TOTAL: {
-
-			}
-
-		};
-
 		// i guess we need to do some data cleaning here
-		var lineKeys = data.keys;
-		var monthKeys = [0,1,2,3,4,5,6,7,8,9,10,11,12];
+		// var lineKeys = data.keys; // these should be hard coded for now
+		// var monthKeys = [0,1,2,3,4,5,6,7,8,9,10,11,12];
+
+		var lineKeys = [
+			'COMBINED',
+			'BREAKFAST',
+			'MORNING_SNACK',
+			'LUNCH',
+			'AFTERNOON_SNACK',
+			'DINNER',
+			'EVENING_SNACK'
+		];
 
 		var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
