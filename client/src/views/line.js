@@ -56,6 +56,8 @@ module.exports = {
 		var lineKeys = data.keys;
 		var monthKeys = [0,1,2,3,4,5,6,7,8,9,10,11,12];
 
+		var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
 
 
 
@@ -64,7 +66,7 @@ module.exports = {
 		    height = 500 - margin.top - margin.bottom;
 
 		var x = d3.scale.ordinal()
-				.domain(monthKeys)
+				.domain(months)
 		    .rangePoints([0, width], 0);
 
 		var y = d3.scale.linear()
@@ -97,17 +99,40 @@ module.exports = {
 
 		// start doing stuff with the data
 
-		lines = [
+		series = [
 			{
+				key: 'BREAKFAST',
 				label: 'Breakfast',
 				points: [
 					{
-						x: 4,
+						x: 'Jan',
 						y: 10
 					},
 					{
-						x: 6,
+						x: 'Feb',
 						y: 30
+					},
+					{
+						x: 'Apr',
+						y: 20
+					}
+				]
+			},
+			{
+				key: 'LUNCH',
+				label: 'Lunch',
+				points: [
+					{
+						x: 'Jan',
+						y: 5
+					},
+					{
+						x: 'Feb',
+						y: 20
+					},
+					{
+						x: 'Mar',
+						y: 15
 					}
 				]
 			}
@@ -122,10 +147,8 @@ module.exports = {
 
 	  y.domain([
 	    0,
-	    d3.max(lines, function(l) { return d3.max(l.points, function(p) { return p.y; }); })
+	    d3.max(series, function(s) { return d3.max(s.points, function(p) { return p.y; }); })
 	  ]);
-
-	  debugger;
 
 	  svg.append("g")
 	      .attr("class", "x axis")
@@ -140,24 +163,26 @@ module.exports = {
 	      .attr("y", 6)
 	      .attr("dy", ".71em")
 	      .style("text-anchor", "end")
-	      .text("Temperature (ºF)");
+	      .text("Calories");
 
-	  var city = svg.selectAll(".city")
-	      .data(cities)
+	  var serie = svg.selectAll(".serie")
+	      .data(series)
 	    .enter().append("g")
-	      .attr("class", "city");
+	      .attr("class", "serie");
 
-	  city.append("path")
+	  serie.append("path")
 	      .attr("class", "line")
-	      .attr("d", function(d) { return line(d.values); })
-	      .style("stroke", function(d) { return color(d.name); });
+	      .attr("d", function(d) { return line(d.points); })
+	      .style("stroke", function(d) { return color(d.key); })
+	      .style("stroke-width", 4)
+	      .style("fill", "transparent");
 
-	  city.append("text")
-	      .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
-	      .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"; })
+	  serie.append("text")
+	      .datum(function(d) { return {label: d.label, value: d.points[d.points.length - 1]}; })
+	      .attr("transform", function(d) { return "translate(" + x(d.value.x) + "," + y(d.value.y) + ")"; })
 	      .attr("x", 3)
 	      .attr("dy", ".35em")
-	      .text(function(d) { return d.name; });
+	      .text(function(d) { return d.label; });
 
 	}
 
