@@ -6,28 +6,27 @@ var NoomData = require('../services/noomData');
 
 // var SunburstData = require('./sunburstData');
 
-var getLineGraphModel = function() {
-	return {
-		COMBINED: getLineModel('black'),
-		BREAKFAST: getLineModel('yellow'),
-		MORNING_SNACK: getLineModel('red'),
-		LUNCH: getLineModel('green'),
-		AFTERNOON_SNACK: getLineModel('grey'),
-		DINNER: getLineModel('blue'),
-		EVENING_SNACK: getLineModel('maroon')
-	};
-};
+// var getLineGraphModel = function() {
+// 	return {
+// 		COMBINED: getLineModel('black'),
+// 		BREAKFAST: getLineModel('yellow'),
+// 		MORNING_SNACK: getLineModel('red'),
+// 		LUNCH: getLineModel('green'),
+// 		AFTERNOON_SNACK: getLineModel('grey'),
+// 		DINNER: getLineModel('blue'),
+// 		EVENING_SNACK: getLineModel('maroon')
+// 	};
+// };
 
-var getLineModel = function(color) {
-	return {
-		color: color,
-		points: {
-			byMonth: [],
-			byDayOfWeek: [],
-			byDayOfMonth: []
-		}
-	};
-};
+// var getLineModel = function(color) {
+// 	return {
+// 		points: {
+// 			byMonth: [],
+// 			byDayOfWeek: [],
+// 			byDayOfMonth: []
+// 		}
+// 	};
+// };
 
 module.exports = {
 
@@ -63,6 +62,7 @@ module.exports = {
 	data: {
 		name: 'foodEntries',
 		color: 'black',
+		// this should be a call to the external module
 		lineGraph: getLineGraphModel(),
 		children: [
 			// red, yellow, green
