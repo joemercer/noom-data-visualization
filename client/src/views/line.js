@@ -63,11 +63,9 @@ module.exports = {
 		    width = 960 - margin.left - margin.right,
 		    height = 500 - margin.top - margin.bottom;
 
-		var parseDate = d3.time.format("%Y%m%d").parse;
-
 		var x = d3.scale.ordinal()
-				.domain(monthKeys);
-		    //.range([0, width]);
+				.domain(monthKeys)
+		    .rangePoints([0, width], 0);
 
 		var y = d3.scale.linear()
 		    .range([height, 0]);
@@ -99,15 +97,21 @@ module.exports = {
 
 		// start doing stuff with the data
 
-		// set the domain of the different lines
-		// distinguished by color
-	  // color.domain(data.keys);
-
-
-
-	  // data.forEach(function(d) {
-	  //   d.date = parseDate(d.date);
-	  // });
+		lines = [
+			{
+				label: 'Breakfast',
+				points: [
+					{
+						x: 4,
+						y: 10
+					},
+					{
+						x: 6,
+						y: 30
+					}
+				]
+			}
+		];
 
 	  // var lines = color.domain().map(function(key) {
 	  //   return {
@@ -117,9 +121,11 @@ module.exports = {
 	  // });
 
 	  y.domain([
-	  	5,
-	  	50
+	    0,
+	    d3.max(lines, function(l) { return d3.max(l.points, function(p) { return p.y; }); })
 	  ]);
+
+	  debugger;
 
 	  svg.append("g")
 	      .attr("class", "x axis")
