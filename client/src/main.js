@@ -8,7 +8,7 @@ require('./styles');
 var d3 = require('d3');
 
 var SunburstView = require('./views/sunburst');
-var LineGraphView = require('./views/line');
+var LineGraphView = require('./views/lineGraph');
 
 var SunburstAndLineGraphModel = require('./models/sunburstAndLineGraph');
 
