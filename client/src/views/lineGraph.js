@@ -1,4 +1,3 @@
-// !!! rename to lineGraph.js
 
 var _ = require('lodash');
 var Backbone = require('backbone');
