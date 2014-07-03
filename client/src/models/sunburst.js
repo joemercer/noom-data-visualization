@@ -29,7 +29,7 @@ var Sunburst = Backbone.Model.extend({
 		}
 
 		// get the data
-		NoomData.get('access code', _.bind(function(data){
+		NoomData.get(accessCode, _.bind(function(data){
 
 			_(data.operations).forEach(_.bind(function(item){
 

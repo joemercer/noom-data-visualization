@@ -10,10 +10,3 @@ var getAccessCode = new GetAccessCode({
 
 });
 
-// big model
-var SunburstAndLineGraphModel = require('./models/sunburstAndLineGraph');
-
-var sunburstAndLineGraphModel = new SunburstAndLineGraphModel({
-	accessCode: '!!!accessCode'
-});
-

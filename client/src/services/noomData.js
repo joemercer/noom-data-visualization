@@ -16,7 +16,13 @@ var NoomData = {
 		// from api
 		// or from localStorage
 
-		$.getJSON('data/SK55HNCD.json', _.bind(function(data){
+
+		// generate the url
+		var url = getUrl(accessCode);
+
+		// url = 'data/SK55HNCD.json';
+
+		$.getJSON(url, _.bind(function(data){
 			this.data = data;
 
 
@@ -42,6 +48,13 @@ var NoomData = {
 		}, this));
 	
 		return this;
+	},
+
+	getUrl: function(accessCode) {
+		var url = 'https://data.noom.com/servlets/HighScoreServer/calorific/download.htm?jsonRequest={%22accessCode%22:%22';
+		url += accessCode;
+		url += '%22,%22generateNewUuids%22:true,%22lastDownloadedGeneration%22:0}';
+		return url;
 	}
 };
 
