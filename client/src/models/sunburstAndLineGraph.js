@@ -1,4 +1,5 @@
 
+var Backbone = require('backbone');
 var SunburstModel = require('./sunburst');
 
 var SunburstAndLineGraph = Backbone.Model.extend({
