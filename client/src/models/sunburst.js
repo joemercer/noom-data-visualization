@@ -45,10 +45,11 @@ var Sunburst = Backbone.Model.extend({
 
 			// START setting up views
 
+			var sunburstView = new SunburstView({
+				model: this
+			});
+
 			var sunburstModel = this.get('data');
-
-			SunburstView.create(sunburstModel);
-
 			var lineGraphView = new LineGraphView({
 				model: sunburstModel.lineGraph
 			});

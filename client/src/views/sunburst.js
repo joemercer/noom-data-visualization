@@ -1,8 +1,16 @@
+
+var Backbone = require('backbone');
 var d3 = require('d3');
 
-module.exports = {
+var Sunburst = Backbone.View.extend({
 
-	create: function(data) {
+	initialize: function() {
+		this.listenTo(this.model, 'change', this.render);
+
+		this.render();
+	},
+
+	render: function() {
 		var width = 960,
 				height = 700,
 				radius = Math.min(width, height) / 2;
@@ -31,7 +39,7 @@ module.exports = {
 			.outerRadius(function(d) { return Math.max(0, y(d.y + d.dy)); });
 
 		// set the root to be our data
-		root = data;
+		root = this.model.get('data');
 
 		var path = svg.selectAll("path")
 			.data(partition.nodes(root))
@@ -61,6 +69,8 @@ module.exports = {
 		}
 	}
 
-};
+});
+
+module.exports = Sunburst;
 
 

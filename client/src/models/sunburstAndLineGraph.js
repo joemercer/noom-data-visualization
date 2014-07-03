@@ -4,6 +4,7 @@ var SunburstModel = require('./sunburst');
 var SunburstAndLineGraph = Backbone.Model.extend({
 
 	defaults: {
+		data: null,
 		currentLevel: 'foodEntries'
 	},
 
