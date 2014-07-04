@@ -7,7 +7,9 @@ var NoomData = {
 
 	// get the data
 	get: function(accessCode, cb) {
-		if (this.data) {
+
+		// return cached data
+		if (this.data && this.data.accessCode === accessCode) {
 			cb(this.data);
 			return this;
 		}
@@ -18,11 +20,13 @@ var NoomData = {
 
 
 		// generate the url
-		var url = getUrl(accessCode);
+		var url = this.getUrl(accessCode);
+
+		console.log('url:', url);
 
 		// url = 'data/SK55HNCD.json';
-
 		$.getJSON(url, _.bind(function(data){
+			console.log('got data', data);
 			this.data = data;
 
 
@@ -51,10 +55,13 @@ var NoomData = {
 	},
 
 	getUrl: function(accessCode) {
-		var url = 'https://data.noom.com/servlets/HighScoreServer/calorific/download.htm?jsonRequest={%22accessCode%22:%22';
-		url += accessCode;
-		url += '%22,%22generateNewUuids%22:true,%22lastDownloadedGeneration%22:0}';
-		return url;
+		// var url = 'https://data.noom.com/servlets/HighScoreServer/calorific/download.htm?';
+		// url += 'jsonRequest={';
+		// url += '"accessCode":"'+accessCode+'",';
+		// url += '"generateNewUuids":true,"lastDownloadedGeneration":0}';
+		// return url;
+
+		return '/noom/data/'+accessCode;
 	}
 };
 

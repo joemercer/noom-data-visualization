@@ -9,7 +9,7 @@ var GetAccessCode = Backbone.View.extend({
 	template: require('../../templates/partials/getAccessCode.hbs'),
 
 	events: {
-    'click #submit-input-access-code': 'submitAccessCode',
+    'click #submit-input-access-code': 'submitAccessCode'
   },
 
 	initialize: function() {
@@ -25,11 +25,10 @@ var GetAccessCode = Backbone.View.extend({
 	submitAccessCode: function(e) {
 		var accessCode = $('#input-access-code').val();
 
+		// for testing
 		// if (!accessCode) {
 		// 	accessCode = 'SK55HNCD';
 		// }
-
-		debugger;
 
 		if (!accessCode) {
 			return;
