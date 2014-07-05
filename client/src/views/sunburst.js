@@ -18,7 +18,20 @@ var Sunburst = Backbone.View.extend({
 		this.height = this.width + this.width*0.05;
 		this.radius = this.width / 2;
 
-		
+		this.$window = $(window);
+		this.$window.resize(_.debounce(_.bind(function(){
+			var newWidth = this.$el.width();
+			var newHeight = this.width + this.width*0.05;
+
+			if (this.width != newWidth || this.height != newHeight) {
+				this.width = newWidth;
+				this.height = newHeight;
+				this.radius = this.width / 2;
+
+				this.render();
+			}
+			
+		}, this), 5));
 
 		this.listenTo(this.model, 'change', this.render);
 
@@ -26,6 +39,8 @@ var Sunburst = Backbone.View.extend({
 	},
 
 	render: function() {
+		this.$el.empty();
+
 		var width = this.width;
 		var height = this.height;
 		// var width = 960,
