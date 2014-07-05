@@ -1,5 +1,6 @@
 
 var _ = require('lodash');
+var $ = require('jquery');
 var Backbone = require('backbone');
 var d3 = require('d3');
 
@@ -10,6 +11,11 @@ var Sunburst = Backbone.View.extend({
 	},
 
 	initialize: function() {
+		this.$el = $('#sunburst');
+		this.dEl = d3.select('#sunburst');
+
+
+
 		this.listenTo(this.model, 'change', this.render);
 
 		this.render();
@@ -28,7 +34,7 @@ var Sunburst = Backbone.View.extend({
 
 		var color = d3.scale.category20c();
 
-		var svg = d3.select("body").append("svg")
+		var svg = this.dEl.append("svg")
 			.attr("width", width)
 			.attr("height", height)
 		.append("g")
