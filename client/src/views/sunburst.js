@@ -1,8 +1,13 @@
 
+var _ = require('lodash');
 var Backbone = require('backbone');
 var d3 = require('d3');
 
 var Sunburst = Backbone.View.extend({
+
+	events: {
+
+	},
 
 	initialize: function() {
 		this.listenTo(this.model, 'change', this.render);
@@ -12,14 +17,14 @@ var Sunburst = Backbone.View.extend({
 
 	render: function() {
 		var width = 960,
-				height = 700,
-				radius = Math.min(width, height) / 2;
+				height = 700;
+		this.radius = Math.min(width, height) / 2;
 
-		var x = d3.scale.linear()
+		this.x = d3.scale.linear()
 			.range([0, 2 * Math.PI]);
 
-		var y = d3.scale.sqrt()
-			.range([0, radius]);
+		this.y = d3.scale.sqrt()
+			.range([0, this.radius]);
 
 		var color = d3.scale.category20c();
 
@@ -32,41 +37,47 @@ var Sunburst = Backbone.View.extend({
 		var partition = d3.layout.partition()
 			.value(function(d) { return d.size; });
 
-		var arc = d3.svg.arc()
-			.startAngle(function(d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x))); })
-			.endAngle(function(d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x + d.dx))); })
-			.innerRadius(function(d) { return Math.max(0, y(d.y)); })
-			.outerRadius(function(d) { return Math.max(0, y(d.y + d.dy)); });
+		this.arc = d3.svg.arc()
+			.startAngle(_.bind(function(d) { return Math.max(0, Math.min(2 * Math.PI, this.x(d.x))); }, this))
+			.endAngle(_.bind(function(d) { return Math.max(0, Math.min(2 * Math.PI, this.x(d.x + d.dx))); }, this))
+			.innerRadius(_.bind(function(d) { return Math.max(0, this.y(d.y)); }, this))
+			.outerRadius(_.bind(function(d) { return Math.max(0, this.y(d.y + d.dy)); }, this));
 
 		// set the root to be our data
 		root = this.model.get('data');
 
-		var path = svg.selectAll("path")
+		this.path = svg.selectAll("path")
 			.data(partition.nodes(root))
 		.enter().append("path")
-			.attr("d", arc)
+			.attr("data-id", function(d){
+				return d.name;
+			})
+			.attr("d", this.arc)
 			.style("fill", function(d) {
 				return d.color;
 			})
-			.on("click", click);
-
-		function click(d) {
-			path.transition()
-				.duration(750)
-				.attrTween("d", arcTween(d));
-		}
+			.on("click", _.bind(this.onArcClicked, this));
 
 		d3.select(self.frameElement).style("height", height + "px");
 
-		// Interpolate the scales!
-		function arcTween(d) {
-			var xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx]),
-					yd = d3.interpolate(y.domain(), [d.y, 1]),
-					yr = d3.interpolate(y.range(), [d.y ? 20 : 0, radius]);
-			return function(d, i) {
-				return i ? function(t) { return arc(d); } : function(t) { x.domain(xd(t)); y.domain(yd(t)).range(yr(t)); return arc(d); };
-			};
-		}
+	},
+
+	onArcClicked: function(d) {
+		console.log(d.name);
+
+		this.path.transition()
+				.duration(750)
+				.attrTween("d", this.arcTween(d));
+	},
+
+	// Interpolate the scales!
+	arcTween: function(d) {
+		var xd = d3.interpolate(this.x.domain(), [d.x, d.x + d.dx]),
+				yd = d3.interpolate(this.y.domain(), [d.y, 1]),
+				yr = d3.interpolate(this.y.range(), [d.y ? 20 : 0, this.radius]);
+		return _.bind(function(d, i) {
+			return i ? _.bind(function(t) { return this.arc(d); }, this) : _.bind(function(t) { this.x.domain(xd(t)); this.y.domain(yd(t)).range(yr(t)); return this.arc(d); }, this);
+		}, this);
 	}
 
 });
