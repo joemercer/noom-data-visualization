@@ -14,7 +14,11 @@ var Sunburst = Backbone.View.extend({
 		this.$el = $('#sunburst');
 		this.dEl = d3.select('#sunburst');
 
+		this.width = this.$el.width();
+		this.height = this.width + this.width*0.05;
+		this.radius = this.width / 2;
 
+		
 
 		this.listenTo(this.model, 'change', this.render);
 
@@ -22,9 +26,11 @@ var Sunburst = Backbone.View.extend({
 	},
 
 	render: function() {
-		var width = 960,
-				height = 700;
-		this.radius = Math.min(width, height) / 2;
+		var width = this.width;
+		var height = this.height;
+		// var width = 960,
+		// 		height = 700;
+		// this.radius = Math.min(width, height) / 2;
 
 		this.x = d3.scale.linear()
 			.range([0, 2 * Math.PI]);
