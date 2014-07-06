@@ -22,14 +22,16 @@ var LineGraph = Backbone.View.extend({
 		this.$el = $('#lineGraph');
 		this.dEl = d3.select('#lineGraph');
 
+		this.$sunburst = $('#sunburst');
+
 		this.margin = {top: 30, right: 90, bottom: 30, left: 70};
 		this.width = this.$el.width();
-		this.height = this.width;
+		this.height = this.$sunburst.height();
 
 		this.$window = $(window);
 		this.$window.resize(_.debounce(_.bind(function(){
 			var newWidth = this.$el.width();
-			var newHeight = this.width + this.width*0.05;
+			var newHeight = this.$sunburst.height();
 
 			if (this.width != newWidth || this.height != newHeight) {
 				this.width = newWidth;
