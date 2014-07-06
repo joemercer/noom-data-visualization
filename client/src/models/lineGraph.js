@@ -639,16 +639,6 @@ var LineGraph = Backbone.Model.extend({
 	// months: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
 	// daysOfWeek: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
 
-	// !!! this method needs to be removed and made Backbone-y
-	getData: function() {
-		debugger;
-		var data = {};
-		data.byMonth = _(this.data).map(function(value) { return value; });
-		data.byDayOfWeek = _(this.data).map(function(value) { return value; });
-
-		return data;
-	},
-
 	add: function(foodEntry) {
 
 		var date = new Date(foodEntry.dateConsumed);
