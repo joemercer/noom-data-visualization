@@ -14,6 +14,7 @@ var Sunburst = Backbone.Model.extend({
 		data: {
 			name: 'foodEntries',
 			color: 'black',
+			totalCalories: 0,
 			lineGraph: new LineGraphModel(),
 			children: [
 				// red, yellow, green
@@ -71,21 +72,25 @@ var Sunburst = Backbone.Model.extend({
 
 	changeLevel: function(key) {
 
+		var found = null;
 		var toRender = null;
 		var data = this.get('data');
 
 		if (data.name === key) {
 			toRender = data.lineGraph;
+			found = data;
 		}
 		else {
 			_(data.children).forEach(function(child1){
 				if (child1.name === key) {
 					toRender = child1.lineGraph;
+					found = child1;
 				}
 				else {
 					_(child1.children).forEach(function(child2){
 						if (child2.name === key) {
 							toRender = child2.lineGraph;
+							found = child2;
 						}
 					});
 				}
@@ -100,6 +105,11 @@ var Sunburst = Backbone.Model.extend({
 
 			this.set('lineGraphView', lineGraphView);
 			this.set('currentLevel', key);
+
+			// !!! this is an awkward place for this
+			var infoTitle = '<h3>All '+found.totalCalories+' '+found.name+' calories binned by day of the week</h3>';
+			$('.info-title').html(infoTitle);
+
 		}
 
 	},
@@ -108,12 +118,15 @@ var Sunburst = Backbone.Model.extend({
 
 		var foodEntries = this.get('data');
 
+		foodEntries.totalCalories += foodEntry.calories;
 		foodEntries.lineGraph.add(foodEntry);
 
 		var foodType = this._addFoodType(foodEntries, foodEntry);
+		foodType.totalCalories += foodEntry.calories;
 		foodType.lineGraph.add(foodEntry);
 
 		var foodCatagory = this._addFoodCatagory(foodType, foodEntry);
+		foodCatagory.totalCalories += foodEntry.calories;
 		foodCatagory.lineGraph.add(foodEntry);
 
 		this.set('data', foodEntries);
@@ -133,6 +146,7 @@ var Sunburst = Backbone.Model.extend({
 			foodType = {
 				name: foodEntry.foodType,
 				color: this.getColor(foodEntry.foodType),
+				totalCalories: 0,
 				lineGraph: new LineGraphModel(),
 				children: []
 			};
@@ -159,6 +173,7 @@ var Sunburst = Backbone.Model.extend({
 			foodCatagory = {
 				name: foodEntry.foodCategoryCode,
 				color: this.getColor(foodEntry.foodCategoryCode),
+				totalCalories: 0,
 				lineGraph: new LineGraphModel(),
 				size: foodEntry.calories
 			};
