@@ -41,6 +41,11 @@ var Sunburst = Backbone.View.extend({
 	render: function() {
 		this.$el.empty();
 
+		// render the sunburst
+		this._render();
+	},
+
+	_render: function() {
 		var width = this.width;
 		var height = this.height;
 		// var width = 960,
@@ -86,15 +91,16 @@ var Sunburst = Backbone.View.extend({
 			.on("click", _.bind(this.onArcClicked, this));
 
 		d3.select(self.frameElement).style("height", height + "px");
-
 	},
 
 	onArcClicked: function(d) {
-		console.log(d.name);
 
 		this.path.transition()
 				.duration(750)
 				.attrTween("d", this.arcTween(d));
+
+		this.model.changeLevel(d.name);
+		
 	},
 
 	// Interpolate the scales!

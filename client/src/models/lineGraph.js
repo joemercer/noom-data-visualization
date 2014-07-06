@@ -135,6 +135,12 @@ var LineGraph = Backbone.Model.extend({
 		byDayOfWeek: getSeries(getPointsForDayOfWeek)
 	},
 
+	initialize: function() {
+		
+		debugger;
+
+	},
+
 	// months: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
 	// daysOfWeek: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
 

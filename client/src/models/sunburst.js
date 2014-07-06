@@ -17,7 +17,9 @@ var Sunburst = Backbone.Model.extend({
 			children: [
 				// red, yellow, green
 			]
-		}
+		},
+		currentLevel: 'foodEntries',
+		lineGraphView: null
 	},
 
 	initialize: function() {
@@ -54,9 +56,46 @@ var Sunburst = Backbone.Model.extend({
 				model: sunburstModel.lineGraph
 			});
 
+			this.set('lineGraphView', lineGraphView);
+
 			// END setting up views
 
 		}, this));
+
+	},
+
+	changeLevel: function(key) {
+
+		var toRender = null;
+		var data = this.get('data');
+		debugger;
+		if (data.name === key) {
+			toRender = data.lineGraph;
+		}
+		else {
+			_(data.children).forEach(function(child1){
+				if (child1.name === key) {
+					toRender = child1.lineGraph;
+				}
+				else {
+					_(child1.children).forEach(function(child2){
+						if (child2.name === key) {
+							toRender = child2.lineGraph;
+						}
+					});
+				}
+			});
+		}
+
+		if (toRender) {
+
+			var lineGraphView = new LineGraphView({
+				model: toRender
+			});
+
+			this.set('lineGraphView', lineGraphView);
+			this.set('currentLevel', key);
+		}
 
 	},
 
