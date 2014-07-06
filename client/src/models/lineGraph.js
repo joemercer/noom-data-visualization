@@ -7,386 +7,129 @@ var LineGraph = Backbone.Model.extend({
 
 	defaults: {},
 
+	getPointsForMonth: function() {
+		return [
+			{
+				x: 'Jan',
+				y: 0
+			},
+			{
+				x: 'Feb',
+				y: 0
+			},
+			{
+				x: 'Mar',
+				y: 0
+			},
+			{
+				x: 'Apr',
+				y: 0
+			},
+			{
+				x: 'May',
+				y: 0
+			},
+			{
+				x: 'Jun',
+				y: 0
+			},
+			{
+				x: 'Jul',
+				y: 0
+			},
+			{
+				x: 'Aug',
+				y: 0
+			},
+			{
+				x: 'Sep',
+				y: 0
+			},
+			{
+				x: 'Oct',
+				y: 0
+			},
+			{
+				x: 'Nov',
+				y: 0
+			},
+			{
+				x: 'Dec',
+				y: 0
+			}
+		];
+	},
+
+	getPointsForDayOfWeek: function() {
+		return [
+			{
+				x: 'Sun',
+				y: 0
+			},
+			{
+				x: 'Mon',
+				y: 0
+			},
+			{
+				x: 'Tue',
+				y: 0
+			},
+			{
+				x: 'Wed',
+				y: 0
+			},
+			{
+				x: 'Thu',
+				y: 0
+			},
+			{
+				x: 'Fri',
+				y: 0
+			},
+			{
+				x: 'Sat',
+				y: 0
+			}
+		];
+	},
+
 	initialize: function() {
 		
 		var byMonth = _.cloneDeep({
 			COMBINED: {
 				key: 'COMBINED',
 				label: 'Combined',
-				points: [
-					{
-						x: 'Jan',
-						y: 0
-					},
-					{
-						x: 'Feb',
-						y: 0
-					},
-					{
-						x: 'Mar',
-						y: 0
-					},
-					{
-						x: 'Apr',
-						y: 0
-					},
-					{
-						x: 'May',
-						y: 0
-					},
-					{
-						x: 'Jun',
-						y: 0
-					},
-					{
-						x: 'Jul',
-						y: 0
-					},
-					{
-						x: 'Aug',
-						y: 0
-					},
-					{
-						x: 'Sep',
-						y: 0
-					},
-					{
-						x: 'Oct',
-						y: 0
-					},
-					{
-						x: 'Nov',
-						y: 0
-					},
-					{
-						x: 'Dec',
-						y: 0
-					}
-				]
+				points: this.getPointsForMonth()
 			},
 			BREAKFAST: {
 				key: 'BREAKFAST',
 				label: 'Breakfast',
-				points: [
-					{
-						x: 'Jan',
-						y: 0
-					},
-					{
-						x: 'Feb',
-						y: 0
-					},
-					{
-						x: 'Mar',
-						y: 0
-					},
-					{
-						x: 'Apr',
-						y: 0
-					},
-					{
-						x: 'May',
-						y: 0
-					},
-					{
-						x: 'Jun',
-						y: 0
-					},
-					{
-						x: 'Jul',
-						y: 0
-					},
-					{
-						x: 'Aug',
-						y: 0
-					},
-					{
-						x: 'Sep',
-						y: 0
-					},
-					{
-						x: 'Oct',
-						y: 0
-					},
-					{
-						x: 'Nov',
-						y: 0
-					},
-					{
-						x: 'Dec',
-						y: 0
-					}
-				]
+				points: this.getPointsForMonth()
 			},
 			MORNING_SNACK: {
 				key: 'MORNING_SNACK',
 				label: 'Morning Snack',
-				points: [
-					{
-						x: 'Jan',
-						y: 0
-					},
-					{
-						x: 'Feb',
-						y: 0
-					},
-					{
-						x: 'Mar',
-						y: 0
-					},
-					{
-						x: 'Apr',
-						y: 0
-					},
-					{
-						x: 'May',
-						y: 0
-					},
-					{
-						x: 'Jun',
-						y: 0
-					},
-					{
-						x: 'Jul',
-						y: 0
-					},
-					{
-						x: 'Aug',
-						y: 0
-					},
-					{
-						x: 'Sep',
-						y: 0
-					},
-					{
-						x: 'Oct',
-						y: 0
-					},
-					{
-						x: 'Nov',
-						y: 0
-					},
-					{
-						x: 'Dec',
-						y: 0
-					}
-				]
+				points: this.getPointsForMonth()
 			},
 			LUNCH: {
 				key: 'LUNCH',
 				label: 'Lunch',
-				points: [
-					{
-						x: 'Jan',
-						y: 0
-					},
-					{
-						x: 'Feb',
-						y: 0
-					},
-					{
-						x: 'Mar',
-						y: 0
-					},
-					{
-						x: 'Apr',
-						y: 0
-					},
-					{
-						x: 'May',
-						y: 0
-					},
-					{
-						x: 'Jun',
-						y: 0
-					},
-					{
-						x: 'Jul',
-						y: 0
-					},
-					{
-						x: 'Aug',
-						y: 0
-					},
-					{
-						x: 'Sep',
-						y: 0
-					},
-					{
-						x: 'Oct',
-						y: 0
-					},
-					{
-						x: 'Nov',
-						y: 0
-					},
-					{
-						x: 'Dec',
-						y: 0
-					}
-				]
+				points: this.getPointsForMonth()
 			},
 			AFTERNOON_SNACK: {
 				key: 'AFTERNOON_SNACK',
 				label: 'Afternoon Snack',
-				points: [
-					{
-						x: 'Jan',
-						y: 0
-					},
-					{
-						x: 'Feb',
-						y: 0
-					},
-					{
-						x: 'Mar',
-						y: 0
-					},
-					{
-						x: 'Apr',
-						y: 0
-					},
-					{
-						x: 'May',
-						y: 0
-					},
-					{
-						x: 'Jun',
-						y: 0
-					},
-					{
-						x: 'Jul',
-						y: 0
-					},
-					{
-						x: 'Aug',
-						y: 0
-					},
-					{
-						x: 'Sep',
-						y: 0
-					},
-					{
-						x: 'Oct',
-						y: 0
-					},
-					{
-						x: 'Nov',
-						y: 0
-					},
-					{
-						x: 'Dec',
-						y: 0
-					}
-				]
+				points: this.getPointsForMonth()
 			},
 			DINNER: {
 				key: 'DINNER',
 				label: 'Dinner',
-				points: [
-					{
-						x: 'Jan',
-						y: 0
-					},
-					{
-						x: 'Feb',
-						y: 0
-					},
-					{
-						x: 'Mar',
-						y: 0
-					},
-					{
-						x: 'Apr',
-						y: 0
-					},
-					{
-						x: 'May',
-						y: 0
-					},
-					{
-						x: 'Jun',
-						y: 0
-					},
-					{
-						x: 'Jul',
-						y: 0
-					},
-					{
-						x: 'Aug',
-						y: 0
-					},
-					{
-						x: 'Sep',
-						y: 0
-					},
-					{
-						x: 'Oct',
-						y: 0
-					},
-					{
-						x: 'Nov',
-						y: 0
-					},
-					{
-						x: 'Dec',
-						y: 0
-					}
-				]
+				points: this.getPointsForMonth()
 			},
 			EVENING_SNACK: {
 				key: 'EVENING_SNACK',
 				label: 'Evening Snack',
-				points: [
-					{
-						x: 'Jan',
-						y: 0
-					},
-					{
-						x: 'Feb',
-						y: 0
-					},
-					{
-						x: 'Mar',
-						y: 0
-					},
-					{
-						x: 'Apr',
-						y: 0
-					},
-					{
-						x: 'May',
-						y: 0
-					},
-					{
-						x: 'Jun',
-						y: 0
-					},
-					{
-						x: 'Jul',
-						y: 0
-					},
-					{
-						x: 'Aug',
-						y: 0
-					},
-					{
-						x: 'Sep',
-						y: 0
-					},
-					{
-						x: 'Oct',
-						y: 0
-					},
-					{
-						x: 'Nov',
-						y: 0
-					},
-					{
-						x: 'Dec',
-						y: 0
-					}
-				]
+				points: this.getPointsForMonth()
 			}
 		});
 
@@ -394,240 +137,37 @@ var LineGraph = Backbone.Model.extend({
 			COMBINED: {
 				key: 'COMBINED',
 				label: 'Combined',
-				points: [
-					{
-						x: 'Sun',
-						y: 0
-					},
-					{
-						x: 'Mon',
-						y: 0
-					},
-					{
-						x: 'Tue',
-						y: 0
-					},
-					{
-						x: 'Wed',
-						y: 0
-					},
-					{
-						x: 'Thu',
-						y: 0
-					},
-					{
-						x: 'Fri',
-						y: 0
-					},
-					{
-						x: 'Sat',
-						y: 0
-					}
-				]
+				points: this.getPointsForDayOfWeek()
 			},
 			BREAKFAST: {
 				key: 'BREAKFAST',
 				label: 'Breakfast',
-				points: [
-					{
-						x: 'Sun',
-						y: 0
-					},
-					{
-						x: 'Mon',
-						y: 0
-					},
-					{
-						x: 'Tue',
-						y: 0
-					},
-					{
-						x: 'Wed',
-						y: 0
-					},
-					{
-						x: 'Thu',
-						y: 0
-					},
-					{
-						x: 'Fri',
-						y: 0
-					},
-					{
-						x: 'Sat',
-						y: 0
-					}
-				]
+				points: this.getPointsForDayOfWeek()
 			},
 			MORNING_SNACK: {
 				key: 'MORNING_SNACK',
 				label: 'Morning Snack',
-				points: [
-					{
-						x: 'Sun',
-						y: 0
-					},
-					{
-						x: 'Mon',
-						y: 0
-					},
-					{
-						x: 'Tue',
-						y: 0
-					},
-					{
-						x: 'Wed',
-						y: 0
-					},
-					{
-						x: 'Thu',
-						y: 0
-					},
-					{
-						x: 'Fri',
-						y: 0
-					},
-					{
-						x: 'Sat',
-						y: 0
-					}
-				]
+				points: this.getPointsForDayOfWeek()
 			},
 			LUNCH: {
 				key: 'LUNCH',
 				label: 'Lunch',
-				points: [
-					{
-						x: 'Sun',
-						y: 0
-					},
-					{
-						x: 'Mon',
-						y: 0
-					},
-					{
-						x: 'Tue',
-						y: 0
-					},
-					{
-						x: 'Wed',
-						y: 0
-					},
-					{
-						x: 'Thu',
-						y: 0
-					},
-					{
-						x: 'Fri',
-						y: 0
-					},
-					{
-						x: 'Sat',
-						y: 0
-					}
-				]
+				points: this.getPointsForDayOfWeek()
 			},
 			AFTERNOON_SNACK: {
 				key: 'AFTERNOON_SNACK',
 				label: 'Afternoon Snack',
-				points: [
-					{
-						x: 'Sun',
-						y: 0
-					},
-					{
-						x: 'Mon',
-						y: 0
-					},
-					{
-						x: 'Tue',
-						y: 0
-					},
-					{
-						x: 'Wed',
-						y: 0
-					},
-					{
-						x: 'Thu',
-						y: 0
-					},
-					{
-						x: 'Fri',
-						y: 0
-					},
-					{
-						x: 'Sat',
-						y: 0
-					}
-				]
+				points: this.getPointsForDayOfWeek()
 			},
 			DINNER: {
 				key: 'DINNER',
 				label: 'Dinner',
-				points: [
-					{
-						x: 'Sun',
-						y: 0
-					},
-					{
-						x: 'Mon',
-						y: 0
-					},
-					{
-						x: 'Tue',
-						y: 0
-					},
-					{
-						x: 'Wed',
-						y: 0
-					},
-					{
-						x: 'Thu',
-						y: 0
-					},
-					{
-						x: 'Fri',
-						y: 0
-					},
-					{
-						x: 'Sat',
-						y: 0
-					}
-				]
+				points: this.getPointsForDayOfWeek()
 			},
 			EVENING_SNACK: {
 				key: 'EVENING_SNACK',
 				label: 'Evening Snack',
-				points: [
-					{
-						x: 'Sun',
-						y: 0
-					},
-					{
-						x: 'Mon',
-						y: 0
-					},
-					{
-						x: 'Tue',
-						y: 0
-					},
-					{
-						x: 'Wed',
-						y: 0
-					},
-					{
-						x: 'Thu',
-						y: 0
-					},
-					{
-						x: 'Fri',
-						y: 0
-					},
-					{
-						x: 'Sat',
-						y: 0
-					}
-				]
+				points: this.getPointsForDayOfWeek()
 			}
 		});
 
