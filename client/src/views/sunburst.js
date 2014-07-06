@@ -100,7 +100,7 @@ var Sunburst = Backbone.View.extend({
 				.attrTween("d", this.arcTween(d));
 
 		this.model.changeLevel(d.name);
-		
+
 	},
 
 	// Interpolate the scales!

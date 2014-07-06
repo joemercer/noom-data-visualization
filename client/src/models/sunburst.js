@@ -68,7 +68,7 @@ var Sunburst = Backbone.Model.extend({
 
 		var toRender = null;
 		var data = this.get('data');
-		debugger;
+
 		if (data.name === key) {
 			toRender = data.lineGraph;
 		}
