@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var $ = require('jquery');
 
 var NoomData = require('../services/noomData');
 
@@ -46,6 +47,10 @@ var Sunburst = Backbone.Model.extend({
 			console.log('transformed to', this.get('data'));
 
 			// START setting up views
+
+			$('.accessCode').addClass('hide');
+
+			$('.visualization').removeClass('hide');
 
 			var sunburstView = new SunburstView({
 				model: this
