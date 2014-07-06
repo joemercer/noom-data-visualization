@@ -9,11 +9,9 @@ var LineGraph = Backbone.View.extend({
 	seriesKeys: [
 		'COMBINED',
 		'BREAKFAST',
-		'MORNING_SNACK',
 		'LUNCH',
-		'AFTERNOON_SNACK',
 		'DINNER',
-		'EVENING_SNACK'
+		'SNACK'
 	],
 	months: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
 	daysOfWeek: ['Sun', 'Mon','Tue','Wed','Thu','Fri','Sat'],

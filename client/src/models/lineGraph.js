@@ -144,19 +144,9 @@ var LineGraph = Backbone.Model.extend({
 				label: 'Breakfast',
 				points: this.getPointsForMonth()
 			},
-			MORNING_SNACK: {
-				key: 'MORNING_SNACK',
-				label: 'Morning Snack',
-				points: this.getPointsForMonth()
-			},
 			LUNCH: {
 				key: 'LUNCH',
 				label: 'Lunch',
-				points: this.getPointsForMonth()
-			},
-			AFTERNOON_SNACK: {
-				key: 'AFTERNOON_SNACK',
-				label: 'Afternoon Snack',
 				points: this.getPointsForMonth()
 			},
 			DINNER: {
@@ -164,9 +154,9 @@ var LineGraph = Backbone.Model.extend({
 				label: 'Dinner',
 				points: this.getPointsForMonth()
 			},
-			EVENING_SNACK: {
-				key: 'EVENING_SNACK',
-				label: 'Evening Snack',
+			SNACK: {
+				key: 'SNACK',
+				label: 'Snack',
 				points: this.getPointsForMonth()
 			}
 		});
@@ -182,19 +172,9 @@ var LineGraph = Backbone.Model.extend({
 				label: 'Breakfast',
 				points: this.getPointsForDayOfWeek()
 			},
-			MORNING_SNACK: {
-				key: 'MORNING_SNACK',
-				label: 'Morning Snack',
-				points: this.getPointsForDayOfWeek()
-			},
 			LUNCH: {
 				key: 'LUNCH',
 				label: 'Lunch',
-				points: this.getPointsForDayOfWeek()
-			},
-			AFTERNOON_SNACK: {
-				key: 'AFTERNOON_SNACK',
-				label: 'Afternoon Snack',
 				points: this.getPointsForDayOfWeek()
 			},
 			DINNER: {
@@ -202,9 +182,9 @@ var LineGraph = Backbone.Model.extend({
 				label: 'Dinner',
 				points: this.getPointsForDayOfWeek()
 			},
-			EVENING_SNACK: {
-				key: 'EVENING_SNACK',
-				label: 'Evening Snack',
+			SNACK: {
+				key: 'SNACK',
+				label: 'Snack',
 				points: this.getPointsForDayOfWeek()
 			}
 		});
@@ -220,6 +200,12 @@ var LineGraph = Backbone.Model.extend({
 	add: function(foodEntry) {
 
 		var date = new Date(foodEntry.dateConsumed);
+
+		if (foodEntry.timeSlot === 'MORNING_SNACK' ||
+		    foodEntry.timeSlot === 'AFTERNOON_SNACK' ||
+		    foodEntry.timeSlot === 'EVENING_SNACK') {
+			foodEntry.timeSlot = 'SNACK';
+		}
 
 		// byMonths for both timeSlot and COMBINED
 		var month = date.getMonth();
