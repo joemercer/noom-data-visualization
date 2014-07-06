@@ -1,5 +1,6 @@
 
 var _ = require('lodash');
+var $ = require('jquery');
 var Backbone = require('backbone');
 var d3 = require('d3');
 
@@ -17,20 +18,44 @@ var LineGraph = Backbone.View.extend({
 	months: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
 	daysOfWeek: ['Sun', 'Mon','Tue','Wed','Thu','Fri','Sat'],
 
-	tagName: 'div',
-	className: 'line-graph-container',
-
 	initialize: function() {
-		this.listenTo(this.model, 'change', this.render);
+		this.$el = $('#lineGraph');
+		this.dEl = d3.select('#lineGraph');
+
+		this.margin = {top: 30, right: 90, bottom: 30, left: 70};
+		this.width = this.$el.width();
+		this.height = this.width;
+
+		this.$window = $(window);
+		this.$window.resize(_.debounce(_.bind(function(){
+			var newWidth = this.$el.width();
+			var newHeight = this.width + this.width*0.05;
+
+			if (this.width != newWidth || this.height != newHeight) {
+				this.width = newWidth;
+				this.height = newHeight;
+
+				this.render();
+			}
+
+		}, this), 5));
+
+		// this.listenTo(this.model, 'change', this.render);
 
 		this.render();
 	},
 
 	render: function() {
+		this.$el.empty();
 
-		var margin = {top: 20, right: 80, bottom: 30, left: 50},
-				width = 960 - margin.left - margin.right,
-				height = 500 - margin.top - margin.bottom;
+		this._render();
+	},
+
+	_render: function() {
+
+		var margin = this.margin;
+		var width = this.width - margin.left - margin.right;
+		var height = this.height - margin.top - margin.bottom;
 
 		// !!! this should be dynamic cuz sometimes we don't want months
 		var x = d3.scale.ordinal()
@@ -58,7 +83,7 @@ var LineGraph = Backbone.View.extend({
 				.x(function(d) { return x(d.x); })
 				.y(function(d) { return y(d.y); });
 
-		var svg = d3.select("body").append("svg")
+		var svg = this.dEl.append("svg")
 				.attr("width", width + margin.left + margin.right)
 				.attr("height", height + margin.top + margin.bottom)
 			.append("g")
