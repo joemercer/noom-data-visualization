@@ -11,51 +11,75 @@ var LineGraph = Backbone.Model.extend({
 		return [
 			{
 				x: 'Jan',
-				y: 0
+				y: 0,
+				total: 0,
+				count: 0
 			},
 			{
 				x: 'Feb',
-				y: 0
+				y: 0,
+				total: 0,
+				count: 0
 			},
 			{
 				x: 'Mar',
-				y: 0
+				y: 0,
+				total: 0,
+				count: 0
 			},
 			{
 				x: 'Apr',
-				y: 0
+				y: 0,
+				total: 0,
+				count: 0
 			},
 			{
 				x: 'May',
-				y: 0
+				y: 0,
+				total: 0,
+				count: 0
 			},
 			{
 				x: 'Jun',
-				y: 0
+				y: 0,
+				total: 0,
+				count: 0
 			},
 			{
 				x: 'Jul',
-				y: 0
+				y: 0,
+				total: 0,
+				count: 0
 			},
 			{
 				x: 'Aug',
-				y: 0
+				y: 0,
+				total: 0,
+				count: 0
 			},
 			{
 				x: 'Sep',
-				y: 0
+				y: 0,
+				total: 0,
+				count: 0
 			},
 			{
 				x: 'Oct',
-				y: 0
+				y: 0,
+				total: 0,
+				count: 0
 			},
 			{
 				x: 'Nov',
-				y: 0
+				y: 0,
+				total: 0,
+				count: 0
 			},
 			{
 				x: 'Dec',
-				y: 0
+				y: 0,
+				total: 0,
+				count: 0
 			}
 		];
 	},
@@ -64,31 +88,45 @@ var LineGraph = Backbone.Model.extend({
 		return [
 			{
 				x: 'Sun',
-				y: 0
+				y: 0,
+				total: 0,
+				count: 0
 			},
 			{
 				x: 'Mon',
-				y: 0
+				y: 0,
+				total: 0,
+				count: 0
 			},
 			{
 				x: 'Tue',
-				y: 0
+				y: 0,
+				total: 0,
+				count: 0
 			},
 			{
 				x: 'Wed',
-				y: 0
+				y: 0,
+				total: 0,
+				count: 0
 			},
 			{
 				x: 'Thu',
-				y: 0
+				y: 0,
+				total: 0,
+				count: 0
 			},
 			{
 				x: 'Fri',
-				y: 0
+				y: 0,
+				total: 0,
+				count: 0
 			},
 			{
 				x: 'Sat',
-				y: 0
+				y: 0,
+				total: 0,
+				count: 0
 			}
 		];
 	},
@@ -186,15 +224,23 @@ var LineGraph = Backbone.Model.extend({
 		// byMonths for both timeSlot and COMBINED
 		var month = date.getMonth();
 		var byMonth = this.get('byMonth');
-		byMonth[foodEntry.timeSlot].points[month].y += foodEntry.calories;
-		byMonth.COMBINED.points[month].y += foodEntry.calories;
+		byMonth[foodEntry.timeSlot].points[month].total += foodEntry.calories;
+		byMonth[foodEntry.timeSlot].points[month].count += 1;
+		byMonth[foodEntry.timeSlot].points[month].y = byMonth[foodEntry.timeSlot].points[month].total;
+		byMonth.COMBINED.points[month].total += foodEntry.calories;
+		byMonth.COMBINED.points[month].count += 1;
+		byMonth.COMBINED.points[month].y = byMonth.COMBINED.points[month].total;
 		this.set('byMonth', byMonth);
 
 		// byDayOfWeek for both timeSlot and COMBINED
 		var dayOfWeek = date.getDay();
 		var byDayOfWeek = this.get('byDayOfWeek');
-		byDayOfWeek[foodEntry.timeSlot].points[dayOfWeek].y += foodEntry.calories;
-		byDayOfWeek.COMBINED.points[dayOfWeek].y += foodEntry.calories;
+		byDayOfWeek[foodEntry.timeSlot].points[dayOfWeek].total += foodEntry.calories;
+		byDayOfWeek[foodEntry.timeSlot].points[dayOfWeek].count += 1;
+		byDayOfWeek[foodEntry.timeSlot].points[dayOfWeek].y = byDayOfWeek[foodEntry.timeSlot].points[dayOfWeek].total;
+		byDayOfWeek.COMBINED.points[dayOfWeek].total += foodEntry.calories;
+		byDayOfWeek.COMBINED.points[dayOfWeek].count += 1;
+		byDayOfWeek.COMBINED.points[dayOfWeek].y = byDayOfWeek.COMBINED.points[dayOfWeek].total;
 		this.set('byDayOfWeek', byDayOfWeek);
 
 	}
